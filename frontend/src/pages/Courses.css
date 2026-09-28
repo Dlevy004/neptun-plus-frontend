@@ -1,18 +1,7 @@
 /*Courses page's topbar*/
-.courses .total-credits, .courses .subject-sign-up-btn {
+.courses .subject-sign-up-btn {
     border: 2px solid var(--secondary-color);
     padding: 0.5rem;
     border-radius: 10px;
     font-size: 15px;
-}
-
-.courses .subject-sign-up-btn {
-    background-color: var(--secondary-color);
-    font-family: var(--primary-font-family);
-    color: var(--text-color2);
-    transition: transform 0.3s ease;
-}
-
-.courses .subject-sign-up-btn:hover {
-    transform: translateY(-3px);
 }
