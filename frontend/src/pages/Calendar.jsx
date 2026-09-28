@@ -8,7 +8,7 @@ function Courses() {
     <div className="courses">
         <TopBar title='Órarend'>
         {/*TODO*/}
-          <span className="total-credits"><Award/> Összes felvett kredit: TODO</span>
+          <span className="total-credits"><Award strokeWidth={3}/> Összes felvett kredit: TODO</span>
         </TopBar>
     </div>
   )
