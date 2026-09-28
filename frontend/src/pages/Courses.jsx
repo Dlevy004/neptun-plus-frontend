@@ -1,3 +1,5 @@
+import { Award } from 'lucide-react'
+
 import TopBar from "../components/common/TopBar"
 
 import './Courses.css'
@@ -8,7 +10,7 @@ function Courses() {
     <div className="courses">
       <TopBar title='Kurzus Katalógus'>
         {/*TODO*/}
-        <span className="total-credits">Összes felvett kredit: TODO</span>
+        <span className="total-credits"><Award/> Összes felvett kredit: TODO</span>
         <button className="subject-sign-up-btn" type='button'>Tárgyfelvétel Véglegesítése</button>
       </TopBar>
 
