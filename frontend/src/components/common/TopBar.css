@@ -39,6 +39,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 0.5rem;
+}
+
+.courses .total-credits svg {
+    width: 17px;
+    height: 17px;
+    color: var(--secondary-color)
 }
 
 .courses .subject-sign-up-btn {
