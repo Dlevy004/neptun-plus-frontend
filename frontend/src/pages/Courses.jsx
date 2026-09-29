@@ -24,7 +24,7 @@ function Courses() {
 
   return (
     <div className="courses">
-      <TopBar title='Kurzus Katalógus' subtitle='Tárgyfelvételi időszak: 2026 Tavasz'>
+      <TopBar title='Kurzus Katalógus'>
         <span className="total-credits"><Award strokeWidth={3}/> Összes felvett kredit: {totalCredits}</span>
         <button className="subject-sign-up-btn" type='button'><CircleCheckBig strokeWidth={3}/> Tárgyfelvétel Véglegesítése</button>
       </TopBar>
