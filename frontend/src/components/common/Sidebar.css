@@ -13,12 +13,8 @@
     height: 100vh;
     flex-shrink: 0;
     gap: 1rem;
-    transition: all 0.8s ease-in-out;
-}
-
-.sidenav-container, .sidenav-collapsed {
-    background-color: var(--bg-color-admin);
-    transition: all 0.3s ease;
+    transition: all 0.3s ease-in-out;
+    background-color: #f8fafc;
 }
 
 .sidenav-container, .sidenav-top {

@@ -10,6 +10,7 @@
   z-index: 1;
   background: #f8fafc;
   margin-bottom: var(--footer-h, 200px);
+  padding: 1.5rem;
 }
 
 @media (max-width: 1024px) {
