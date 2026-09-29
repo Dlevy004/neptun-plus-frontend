@@ -46,6 +46,6 @@ body {
 ::-webkit-scrollbar-track { background: hsl(202, 72%, 47%, 0.4); }
 
 ::-webkit-scrollbar-thumb {
-    background-color: var(--primary-color);
+    background-color: var(--secondary-color);
     border-radius: 20px;
 }
