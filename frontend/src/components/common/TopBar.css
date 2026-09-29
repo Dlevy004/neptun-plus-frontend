@@ -31,7 +31,7 @@
 }
 
 /*Total credit number*/
-.courses .total-credits {
+.total-credits {
     border: 2px solid var(--secondary-color);
     padding: 0.5rem;
     border-radius: 10px;
@@ -42,7 +42,7 @@
     gap: 0.5rem;
 }
 
-.courses .total-credits svg {
+.total-credits svg {
     width: 17px;
     height: 17px;
     color: var(--secondary-color)

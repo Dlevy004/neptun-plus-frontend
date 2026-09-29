@@ -12,13 +12,16 @@ function Calendar() {
   const { draft, totalCredits } = useEnrollment()
 
   return (
-    <div className="courses">
-        <TopBar title='Órarend'>
-        {/*TODO*/}
-          <span className="total-credits"><Award strokeWidth={3}/> Összes felvett kredit: TODO</span>
-        </TopBar>
+    <div className="calendar-page">
+      <TopBar title='Órarend'>
+        <span className="total-credits"><Award strokeWidth={3}/> Összes felvett kredit: {totalCredits}</span>
+      </TopBar>
+
+      <Card title='Heti Órarend' aside={<span className='card-note'>Hétfő - Péntek</span>}>
+        <SchedulePlanner courses={draft} />
+      </Card>
     </div>
   )
 }
 
-export default Courses
+export default Calendar
