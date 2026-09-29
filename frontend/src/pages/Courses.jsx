@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { Award, CircleCheckBig } from 'lucide-react'
 
 import TopBar from '../components/common/TopBar'
@@ -7,20 +6,13 @@ import AvailableCourses from '../components/courses/AvailableCourses'
 import SchedulePlanner from '../components/schedule/SchedulePlanner'
 import DraftList from '../components/enrollment/DraftList'
 import WaitlistPanel from '../components/enrollment/WaitlistPanel'
-import { mockCourses } from '../data/mockCourses'
+import { useEnrollment } from '../context/EnrollmentContext'
 
 import './Courses.css'
 
 
 function Courses() {
-  const [courses, setCourses] = useState(mockCourses)
-
-  const draft = courses.filter((c) => c.status === 'draft')
-  const waitlist = courses.filter((c) => c.status === 'waitlist')
-  const totalCredits = draft.reduce((sum, c) => sum + c.credits, 0)
-
-  const setStatus = (code, status) =>
-    setCourses((prev) => prev.map((c) => (c.code === code ? { ...c, status } : c)))
+  const { courses, draft, waitlist, totalCredits, setStatus } = useEnrollment()
 
   return (
     <div className="courses">
