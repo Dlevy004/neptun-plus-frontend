@@ -1,9 +1,5 @@
-import { useState, useEffect } from 'react'
-
 import PropTypes from 'prop-types'
-import {
-    BookOpenText, CalendarDays
-} from 'lucide-react'
+import { BookOpenText, CalendarDays } from 'lucide-react'
 
 import './Sidebar.css'
 
@@ -12,16 +8,7 @@ import MobileMenu from './MobileMenu'
 import HideButton from './HideButton'
 
 
-function SideNavbar({ isMobileMenuOpen, closeMobileMenu }) {
-    const [isCollapsed, setIsCollapsed] = useState(() => {
-        const savedState = localStorage.getItem('isSidebarCollapsed')
-        return savedState === 'true'
-    })
-
-    useEffect(() => {
-        localStorage.setItem('isSidebarCollapsed', isCollapsed)
-    }, [isCollapsed])
-
+function SideNavbar({ isMobileMenuOpen, closeMobileMenu, isCollapsed, setIsCollapsed }) {
     const adminNavLinks = (
         <>
             <NavButton IconComponent={BookOpenText} title='Kurzusok' url='/courses' onClick={closeMobileMenu} />
@@ -70,7 +57,9 @@ function SideNavbar({ isMobileMenuOpen, closeMobileMenu }) {
 
 SideNavbar.propTypes = {
     isMobileMenuOpen: PropTypes.bool.isRequired,
-    closeMobileMenu: PropTypes.func.isRequired
+    closeMobileMenu: PropTypes.func.isRequired,
+    isCollapsed: PropTypes.bool.isRequired,
+    setIsCollapsed: PropTypes.func.isRequired
 }
 
 export default SideNavbar

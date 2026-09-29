@@ -1,19 +1,21 @@
 .sidenav-container {
     width: 190px;
-    z-index: 50;
 }
 
 .sidenav-collapsed { width: 85px; }
 
 .sidenav-container, .sidenav-collapsed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 50;
+
     box-shadow: 0px 0px 33px 10px rgba(0,0,0,0.2);
     justify-content: space-between;
-    position: sticky;
-    top: 0;
-    height: 100vh;
     flex-shrink: 0;
     gap: 1rem;
-    transition: all 0.3s ease-in-out;
+    transition: width 0.3s ease-in-out;
     background-color: #f8fafc;
 }
 
@@ -52,6 +54,7 @@
 }
 
 .hide-btn {
+    z-index: 51;
     border: 2px solid black;
     border-radius: 50%;
     padding: 0.3rem;
