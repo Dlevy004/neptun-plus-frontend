@@ -6,15 +6,19 @@
 .app-content {
   flex: 1;
   min-width: 0;
-  position: relative;
-  z-index: 1;
-  background: #f8fafc;
-  margin-bottom: var(--footer-h, 200px);
+  margin-left: 190px;
   padding: 1.5rem;
+  transition: margin-left 0.3s ease-in-out;
+}
+
+.app-content--collapsed {
+  margin-left: 85px;
 }
 
 @media (max-width: 1024px) {
-  .app-content {
+  .app-content,
+  .app-content--collapsed {
+    margin-left: 0;
     padding: 16px;
   }
 }
