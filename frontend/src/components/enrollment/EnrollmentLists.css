@@ -1,0 +1,43 @@
+.enroll-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.enroll-item {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.6rem 0.75rem;
+    border-radius: 0.6rem;
+    background: rgba(0, 0, 0, 0.03);
+}
+
+.enroll-dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background: #0f9d8a;
+    flex-shrink: 0;
+}
+
+.wait-icon { color: #d97706; flex-shrink: 0; }
+.wait-pos { color: #d97706; }
+
+.enroll-info { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.enroll-info strong { font-size: 0.85rem; }
+.enroll-info small { font-size: 0.72rem; opacity: 0.65; }
+
+.icon-btn {
+    border: none;
+    background: transparent;
+    color: #ef4444;
+    cursor: pointer;
+    padding: 0.25rem;
+    display: flex;
+}
+
+.list-empty { margin: 0; font-size: 0.85rem; opacity: 0.6; }
