@@ -1,0 +1,35 @@
+/*Courses page's topbar*/
+.courses .subject-sign-up-btn {
+    border: 2px solid var(--secondary-color);
+    padding: 0.5rem;
+    border-radius: 10px;
+    font-size: 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem
+}
+
+.courses .subject-sign-up-btn svg {
+    width: 17px;
+    height: 17px;
+    color: white
+}
+
+/*Course layout*/
+.courses-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    gap: 1.5rem;
+}
+
+.courses-side {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+@media (max-width: 1024px) {
+    .courses-layout { grid-template-columns: 1fr; }
+}

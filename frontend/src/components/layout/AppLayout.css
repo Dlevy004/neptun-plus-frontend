@@ -1,0 +1,24 @@
+.app-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.app-content {
+  flex: 1;
+  min-width: 0;
+  margin-left: 190px;
+  padding: 1.5rem;
+  transition: margin-left 0.3s ease-in-out;
+}
+
+.app-content--collapsed {
+  margin-left: 85px;
+}
+
+@media (max-width: 1024px) {
+  .app-content,
+  .app-content--collapsed {
+    margin-left: 0;
+    padding: 16px;
+  }
+}

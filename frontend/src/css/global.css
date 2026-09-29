@@ -1,0 +1,52 @@
+:root {
+  --bg-color-primary: #f8fafc;
+
+  --primary-color: #1b2a4e;
+  --secondary-color: #2ac299;
+
+  --text-color1: black;
+  --text-color2: white;
+
+  --fs-h1: clamp(2rem, 1.6428571428571428rem + 1.7857142857142856vw, 4.5rem);
+  --fs-h2: clamp(1.5rem, 1.3571428571428572rem + 0.7142857142857143vw, 2.5rem);
+  --fs-h3: clamp(1.25rem, 1.1785714285714286rem + 0.35714285714285715vw, 1.75rem);
+  --fs-p: clamp(1rem, 0.9642857142857143rem + 0.17857142857142858vw, 1.25rem);
+
+  --primary-font-family: 'Josefin sans', 'sans-serif';
+}
+
+html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+*, ::after, ::before {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+ul, ol { list-style: none; }
+
+a { text-decoration: none; }
+
+a, button { cursor: pointer; }
+
+body {
+    background-color: var(--bg-color-primary);
+    color: var(--text-color1);
+    font-family: var(--primary-font-family);
+    overflow-x: hidden;
+    transition: all 0.3s ease;
+}
+
+/*Scrollbar*/
+::-webkit-scrollbar { width: 0.8rem; }
+
+::-webkit-scrollbar-track { background: hsla(202, 63%, 81%, 0.4); }
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--secondary-color);
+    border-radius: 20px;
+}

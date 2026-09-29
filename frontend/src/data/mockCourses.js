@@ -1,0 +1,16 @@
+export const mockCourses = [
+  { code: 'MAT101', name: 'Matematika 1', credits: 5, type: 'EA+GY', hours: '4+2', status: 'none', color: 'teal',
+    schedule: [{ day: 0, start: 9, duration: 2 }, { day: 2, start: 9, duration: 2 }] },
+  { code: 'INF202', name: 'Algoritmusok és adatszerkezetek', credits: 6, type: 'EA+GY', hours: '4+2', status: 'none', color: 'orange',
+    schedule: [{ day: 1, start: 10, duration: 2 }, { day: 1, start: 14, duration: 2 }] },
+  { code: 'AI303', name: 'Alkalmazott Mesterséges Intelligencia', credits: 4, type: 'EA', hours: '2', status: 'draft', color: 'blue',
+    schedule: [{ day: 0, start: 12, duration: 2 }, { day: 4, start: 10, duration: 4 }] },
+  { code: 'FIZ102', name: 'Fizika alapjai', credits: 4, type: 'EA', hours: '2', status: 'none', color: 'teal',
+    schedule: [{ day: 3, start: 8, duration: 2 }] },
+  { code: 'WEB404', name: 'Korszerű Webes Technológiák', credits: 5, type: 'GY', hours: '2', status: 'draft', color: 'blue',
+    schedule: [{ day: 2, start: 14, duration: 2 }] },
+  { code: 'DB201', name: 'Adatbázisok tervezése', credits: 5, type: 'EA+GY', hours: '2+2', status: 'none', color: 'green',
+    schedule: [{ day: 3, start: 11, duration: 4 }] },
+  { code: 'LOG501', name: 'Matematikai Logika', credits: 3, type: 'EA', hours: '2', status: 'waitlist', waitlistPosition: 3, color: 'orange',
+    schedule: [{ day: 2, start: 12, duration: 2 }] },
+]

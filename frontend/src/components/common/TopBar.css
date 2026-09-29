@@ -1,0 +1,64 @@
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+
+    padding: 1rem 0;
+    margin-left: 3rem;
+    margin-right: 3rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.top-bar-text h1 {
+    margin: 0;
+    font-size: var(--fs-h2);
+    color: var(--text-color1);
+}
+
+.top-bar-text p {
+    margin: 0.25rem 0 0;
+    font-size: 0.85rem;
+    opacity: 0.65;
+}
+
+.top-bar-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+/*Total credit number*/
+.total-credits {
+    border: 2px solid var(--secondary-color);
+    padding: 0.5rem;
+    border-radius: 10px;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.total-credits svg {
+    width: 17px;
+    height: 17px;
+    color: var(--secondary-color)
+}
+
+.courses .subject-sign-up-btn {
+    background-color: var(--secondary-color);
+    font-family: var(--primary-font-family);
+    color: var(--text-color2);
+    transition: transform 0.3s ease;
+}
+
+.courses .subject-sign-up-btn:hover {
+    transform: translateY(-3px);
+}
+
+@media (max-width: 1024px) {
+    .top-bar-text h1 { font-size: var(--fs-h3); }
+}
