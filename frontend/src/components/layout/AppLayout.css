@@ -1,13 +1,15 @@
 .app-layout {
   display: flex;
   min-height: 100vh;
-  background: var(--bg-color-primary);
 }
 
 .app-content {
   flex: 1;
   min-width: 0;
-  padding: 24px 32px;
+  position: relative;
+  z-index: 1;
+  background: #f8fafc;
+  margin-bottom: var(--footer-h, 200px);
 }
 
 @media (max-width: 1024px) {

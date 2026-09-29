@@ -16,3 +16,20 @@
     height: 17px;
     color: white
 }
+
+/*Course layout*/
+.courses-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    gap: 1.5rem;
+}
+
+.courses-side {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+@media (max-width: 1024px) {
+    .courses-layout { grid-template-columns: 1fr; }
+}
