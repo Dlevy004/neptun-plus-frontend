@@ -1,6 +1,7 @@
 import './SchedulePlanner.css'
 
 const DAYS = ['Hét', 'Kedd', 'Szer', 'Csüt', 'Pén']
+const FULL_DAYS = ['Hétfő', 'Kedd', 'Szerda', 'Csütörtök', 'Péntek']
 const START_HOUR = 8
 const END_HOUR = 20
 
