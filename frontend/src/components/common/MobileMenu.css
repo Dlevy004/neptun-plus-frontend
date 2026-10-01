@@ -24,7 +24,7 @@
         top: 0px;
         z-index: 200;
 
-        background: var(--mobile-bg-color);
+        background: #f8fafc;
         box-shadow: -5px 0 20px rgba(0,0,0,0.1);
         border-left: none;
 
