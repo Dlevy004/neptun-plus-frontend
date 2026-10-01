@@ -3,6 +3,7 @@ import { Outlet } from 'react-router-dom'
 
 import './AppLayout.css'
 import Sidebar from '../common/Sidebar'
+import HamburgerMenu from '../common/HamburgerMenu'
 
 
 function AppLayout() {
@@ -23,6 +24,14 @@ function AppLayout() {
         isCollapsed={isCollapsed}
         setIsCollapsed={setIsCollapsed}
       />
+
+      <div className="mobile-topbar">
+        <span className="mobile-topbar-logo">Neptun+</span>
+        <HamburgerMenu
+          isOpen={isMobileMenuOpen}
+          onClick={() => setIsMobileMenuOpen(true)}
+        />
+      </div>
 
       <main className={`app-content ${isCollapsed ? 'app-content--collapsed' : ''}`}>
         <Outlet />
