@@ -62,3 +62,22 @@
 @media (max-width: 1024px) {
     .top-bar-text h1 { font-size: var(--fs-h3); }
 }
+
+@media (max-width: 570px) {
+  .top-bar {
+    flex-direction: column;
+    align-items: stretch;
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+
+  .top-bar-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .top-bar-actions > * {
+    width: 100%;
+    justify-content: center;
+  }
+}

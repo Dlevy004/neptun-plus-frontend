@@ -1,6 +1,7 @@
 import './SchedulePlanner.css'
 
 const DAYS = ['Hét', 'Kedd', 'Szer', 'Csüt', 'Pén']
+const FULL_DAYS = ['Hétfő', 'Kedd', 'Szerda', 'Csütörtök', 'Péntek']
 const START_HOUR = 8
 const END_HOUR = 20
 
@@ -44,6 +45,33 @@ function SchedulePlanner({ courses, compact = false }) {
             <span>{e.start}:00</span>
           </div>
         ))}
+      </div>
+
+      <div className='planner-agenda'>
+        {FULL_DAYS.map((day, i) => {
+          const dayEvents = events
+            .filter((e) => e.day === i)
+            .sort((a, b) => a.start - b.start)
+
+          if (dayEvents.length === 0) return null
+
+          return (
+            <section key={day} className='agenda-day'>
+              <h3>{day}</h3>
+              <ul>
+                {dayEvents.map((e) => (
+                  <li key={`${e.code}-${e.day}-${e.start}`} className={`agenda-event planner-event--${e.color}`}>
+                    <span className='agenda-time'>{e.start}:00 – {e.start + e.duration}:00</span>
+                    <strong>{e.name}</strong>
+                    <small>{e.code}</small>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )
+        })}
+
+        {events.length === 0 && <p className='list-empty'>Még nincs felvett órád.</p>}
       </div>
     </div>
   )

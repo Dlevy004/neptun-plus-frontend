@@ -5,6 +5,7 @@ import './AvailableCourses.css'
 
 import Card from '../common/Card'
 import CourseItem from './CourseItem'
+import CourseCard from './CourseCard'
 
 
 function AvailableCourses({ courses, onAdd }) {
@@ -49,6 +50,12 @@ function AvailableCourses({ courses, onAdd }) {
             ))}
           </tbody>
         </table>
+      </div>
+
+      <div className='course-cards'>
+        {filtered.map((course) => (
+          <CourseCard key={course.code} course={course} onAdd={onAdd} />
+        ))}
       </div>
     </Card>
   )

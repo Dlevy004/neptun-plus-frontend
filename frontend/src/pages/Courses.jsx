@@ -28,8 +28,10 @@ function Courses() {
           <Card title='Órarend Tervezet' aside={<span className='card-note'>Hétfő - Péntek</span>}>
             <SchedulePlanner courses={draft} compact />
           </Card>
-          <DraftList courses={draft} onRemove={(code) => setStatus(code, 'none')} />
-          <WaitlistPanel courses={waitlist} onRemove={(code) => setStatus(code, 'none')} />
+          <div className='draft-waitlist-wrapper'>
+            <DraftList  className='draft' courses={draft} onRemove={(code) => setStatus(code, 'none')} />
+            <WaitlistPanel className='wait' courses={waitlist} onRemove={(code) => setStatus(code, 'none')} />
+          </div>
         </div>
       </div>
     </div>

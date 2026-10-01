@@ -15,10 +15,37 @@
   margin-left: 85px;
 }
 
+.mobile-topbar {
+  display: none;
+}
+
 @media (max-width: 1024px) {
   .app-content,
   .app-content--collapsed {
     margin-left: 0;
     padding: 16px;
+    padding-top: calc(60px + 16px); /* hely a fixed mobile-topbar alatt */
+  }
+
+  .mobile-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    z-index: 70;
+
+    padding: 0 1rem;
+    background: var(--primary-color);
+  }
+
+  .mobile-topbar-logo {
+    font-weight: 700;
+    font-size: var(--fs-h3);
+    color: var(--text-color2);
   }
 }

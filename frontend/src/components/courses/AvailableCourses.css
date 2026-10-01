@@ -69,3 +69,50 @@
 }
 .action-btn--done { background: #dcfce7; color: #16a34a; cursor: default; }
 .action-btn--wait { background: #fef3c7; color: #d97706; cursor: default; }
+
+/*Cards*/
+.course-cards { display: none; }
+
+.course-card {
+    padding: 0.85rem 1rem;
+    border-radius: 0.8rem;
+    background: rgba(0, 0, 0, 0.03);
+}
+
+.course-card-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 0.75rem;
+}
+
+.course-card-title { min-width: 0; }
+
+.course-card-title h3 {
+    margin-top: 0.15rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.course-card-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem 0.9rem;
+    margin-top: 0.7rem;
+    font-size: 0.8rem;
+}
+
+@media (max-width: 570px) {
+    .course-table-wrapper { display: none; }
+
+    .course-cards {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .available-courses .card-header { flex-wrap: wrap; }
+    .available-courses .search-box { width: 100%; }
+    .available-courses .search-box input { flex: 1; width: auto; }
+}
