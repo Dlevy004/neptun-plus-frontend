@@ -1,0 +1,8 @@
+version: '3.8'
+
+services:
+  neptun-frontend:
+    build: .
+    container_name: neptun_plus_frontend
+    ports:
+      - "5173:5173"
