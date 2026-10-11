@@ -1,5 +1,11 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { fetchCourses, enrollCourseApi, dropCourseApi } from '../services/courseService';
+import toast from 'react-hot-toast';
+import { 
+  fetchCourses, 
+  fetchUserEnrollments, 
+  enrollCourseApi, 
+  dropCourseApi 
+} from '../services/courseService';
 
 export const EnrollmentContext = createContext();
 
@@ -19,12 +25,20 @@ export const EnrollmentProvider = ({ children }) => {
 
   const currentUserId = 1;
 
-  const loadCourses = async () => {
+  const loadData = async () => {
     try {
       setLoading(true);
       setError(null);
-      const data = await fetchCourses();
-      setCourses(data);
+
+      const [allCourses, enrolledIds] = await Promise.all([
+        fetchCourses(),
+        fetchUserEnrollments(currentUserId)
+      ]);
+
+      setCourses(allCourses);
+
+      const userEnrolled = allCourses.filter(c => enrolledIds.includes(c.id));
+      setEnrolledCourses(userEnrolled);
     } catch (err) {
       setError(err.message);
     } finally {
@@ -33,44 +47,30 @@ export const EnrollmentProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    loadCourses();
+    loadData();
   }, []);
 
-  // Kurzus felvétele
   const enrollCourse = async (courseId) => {
     try {
-      await enrollCourseApi(currentUserId, courseId);
-      
-      // Típusfüggetlen keresés (szám vs string kezelése)
-      const courseToAdd = courses.find(
-        c => String(c.id) === String(courseId) || c.code === courseId
-      );
+      const result = await enrollCourseApi(currentUserId, courseId);
 
-      if (courseToAdd) {
-        setEnrolledCourses(prev => {
-          if (prev.some(c => String(c.id) === String(courseToAdd.id))) return prev;
-          return [...prev, courseToAdd];
-        });
-      }
+      toast.success(result.message || 'Sikeres tárgyfelvétel!');
 
-      await loadCourses();
+      await loadData();
     } catch (err) {
-      alert(`Hiba a tárgy felvételekor: ${err.message}`);
+      toast.error(err.message || 'Sikertelen tárgyfelvétel!');
     }
   };
 
-  // Kurzus leadása
   const dropCourse = async (courseId) => {
     try {
-      await dropCourseApi(currentUserId, courseId);
-      
-      setEnrolledCourses(prev => 
-        prev.filter(c => String(c.id) !== String(courseId) && c.code !== courseId)
-      );
-      
-      await loadCourses();
+      const result = await dropCourseApi(currentUserId, courseId);
+
+      toast.success(result.message || 'Sikeres tárgy leadás!');
+
+      await loadData();
     } catch (err) {
-      alert(`Hiba a tárgy leadásakor: ${err.message}`);
+      toast.error(err.message || 'Sikertelen tárgy leadás!');
     }
   };
 
@@ -83,7 +83,7 @@ export const EnrollmentProvider = ({ children }) => {
         error,
         enrollCourse,
         dropCourse,
-        refreshCourses: loadCourses
+        refreshCourses: loadData
       }}
     >
       {children}
