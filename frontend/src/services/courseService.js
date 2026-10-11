@@ -1,4 +1,4 @@
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8001';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
 
 const toNumericId = (id) => {
   if (typeof id === 'number') return id;
@@ -6,28 +6,17 @@ const toNumericId = (id) => {
   return isNaN(parsed) ? id : parsed;
 };
 
-const parseErrorMessage = (errorData, defaultMessage) => {
-  if (!errorData || !errorData.detail) return defaultMessage;
-  if (typeof errorData.detail === 'string') return errorData.detail;
-  if (Array.isArray(errorData.detail)) {
-    return errorData.detail.map(err => err.msg || JSON.stringify(err)).join(', ');
-  }
-  return JSON.stringify(errorData.detail);
-};
-
 export const fetchCourses = async () => {
   try {
     const response = await fetch(`${API_BASE_URL}/api/courses`);
-    if (!response.ok) {
-      throw new Error('Nem sikerült a kurzusok betöltése a backendről.');
-    }
+    if (!response.ok) throw new Error('Nem sikerült a kurzusok betöltése.');
     const data = await response.json();
 
     return data.map(course => ({
       id: course.id,
       code: `COURSE-${course.id}`,
-      title: course.name || 'Ismeretlen kurzus',
-      name: course.name || 'Ismeretlen kurzus',
+      title: course.name,
+      name: course.name,
       credits: 3,
       type: 'EA+GY',
       hours: '2+2',
@@ -44,19 +33,35 @@ export const fetchCourses = async () => {
   }
 };
 
+export const fetchUserEnrollments = async (userId = 1) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/users/${userId}/enrollments`);
+    if (!response.ok) return [];
+    const data = await response.json();
+    return data.enrolled_course_ids || [];
+  } catch (error) {
+    console.error('API Hiba (fetchUserEnrollments):', error);
+    return [];
+  }
+};
+
 export const enrollCourseApi = async (userId, courseId) => {
   try {
-    const cleanId = toNumericId(courseId);
-    const response = await fetch(`${API_BASE_URL}/internal/courses/${cleanId}/reserve`, {
+    const response = await fetch(`${API_BASE_URL}/enroll`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        user_id: userId,
+        course_id: toNumericId(courseId)
+      })
     });
 
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({}));
-      throw new Error(parseErrorMessage(errorData, 'Sikertelen tárgyfelvétel'));
+      const errorMsg = typeof errorData.detail === 'string'
+        ? errorData.detail
+        : 'Sikertelen tárgyfelvétel';
+      throw new Error(errorMsg);
     }
 
     return await response.json();
@@ -68,17 +73,21 @@ export const enrollCourseApi = async (userId, courseId) => {
 
 export const dropCourseApi = async (userId, courseId) => {
   try {
-    const cleanId = toNumericId(courseId);
-    const response = await fetch(`${API_BASE_URL}/internal/courses/${cleanId}/release`, {
+    const response = await fetch(`${API_BASE_URL}/drop`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        user_id: userId,
+        course_id: toNumericId(courseId)
+      })
     });
 
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({}));
-      throw new Error(parseErrorMessage(errorData, 'Sikertelen tárgy leadás'));
+      const errorMsg = typeof errorData.detail === 'string'
+        ? errorData.detail
+        : 'Sikertelen tárgy leadás';
+      throw new Error(errorMsg);
     }
 
     return await response.json();
