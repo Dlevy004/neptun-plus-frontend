@@ -10,27 +10,58 @@ import { useEnrollment } from '../context/EnrollmentContext'
 
 import './Courses.css'
 
-
 function Courses() {
-  const { courses, draft, waitlist, totalCredits, setStatus } = useEnrollment()
+  const {
+    courses = [],
+    enrolledCourses = [],
+    enrollCourse,
+    dropCourse,
+    loading,
+    error
+  } = useEnrollment()
+
+  const totalCredits = enrolledCourses.reduce(
+    (sum, course) => sum + (course.credits || 0),
+    0
+  )
 
   return (
     <div className="courses">
       <TopBar title='Kurzus Katalógus'>
-        <span className="total-credits"><Award strokeWidth={3}/> Összes felvett kredit: {totalCredits}</span>
-        <button className="subject-sign-up-btn" type='button'><CircleCheckBig strokeWidth={3}/> Tárgyfelvétel Véglegesítése</button>
+        <span className="total-credits">
+          <Award strokeWidth={3}/> Összes felvett kredit: {totalCredits}
+        </span>
+        <button className="subject-sign-up-btn" type='button'>
+          <CircleCheckBig strokeWidth={3}/> Tárgyfelvétel Véglegesítése
+        </button>
       </TopBar>
 
+      {error && <div className="error-banner">{error}</div>}
+
       <div className='courses-layout'>
-        <AvailableCourses courses={courses} onAdd={(code) => setStatus(code, 'draft')} />
+        <AvailableCourses
+          courses={courses}
+          loading={loading}
+          onAdd={(courseId) => enrollCourse(courseId)}
+        />
 
         <div className='courses-side'>
           <Card title='Órarend Tervezet' aside={<span className='card-note'>Hétfő - Péntek</span>}>
-            <SchedulePlanner courses={draft} compact />
+            <SchedulePlanner courses={enrolledCourses} compact />
           </Card>
+
           <div className='draft-waitlist-wrapper'>
-            <DraftList  className='draft' courses={draft} onRemove={(code) => setStatus(code, 'none')} />
-            <WaitlistPanel className='wait' courses={waitlist} onRemove={(code) => setStatus(code, 'none')} />
+            <DraftList
+              className='draft'
+              courses={enrolledCourses}
+              onRemove={(courseId) => dropCourse(courseId)}
+            />
+
+            <WaitlistPanel
+              className='wait'
+              courses={[]}
+              onRemove={(courseId) => dropCourse(courseId)}
+            />
           </div>
         </div>
       </div>
