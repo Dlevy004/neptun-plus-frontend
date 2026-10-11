@@ -1,37 +1,92 @@
-import { createContext, useContext, useState, useMemo } from 'react'
-import PropTypes from 'prop-types'
+import React, { createContext, useContext, useState, useEffect } from 'react';
+import { fetchCourses, enrollCourseApi, dropCourseApi } from '../services/courseService';
 
-import { mockCourses } from '../data/mockCourses'
+export const EnrollmentContext = createContext();
 
-const EnrollmentContext = createContext(null)
+export const useEnrollment = () => {
+  const context = useContext(EnrollmentContext);
+  if (!context) {
+    throw new Error('useEnrollment-nek az EnrollmentProvider-en belül kell lennie!');
+  }
+  return context;
+};
 
-export function EnrollmentProvider({ children }) {
-  const [courses, setCourses] = useState(mockCourses)
+export const EnrollmentProvider = ({ children }) => {
+  const [courses, setCourses] = useState([]);
+  const [enrolledCourses, setEnrolledCourses] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const setStatus = (code, status) =>
-    setCourses((prev) => prev.map((c) => (c.code === code ? { ...c, status } : c)))
+  const currentUserId = 1;
 
-  const value = useMemo(() => {
-    const draft = courses.filter((c) => c.status === 'draft')
-    const waitlist = courses.filter((c) => c.status === 'waitlist')
-    const totalCredits = draft.reduce((sum, c) => sum + c.credits, 0)
+  const loadCourses = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      const data = await fetchCourses();
+      setCourses(data);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    return { courses, draft, waitlist, totalCredits, setStatus }
-  }, [courses])
+  useEffect(() => {
+    loadCourses();
+  }, []);
+
+  // Kurzus felvétele
+  const enrollCourse = async (courseId) => {
+    try {
+      await enrollCourseApi(currentUserId, courseId);
+      
+      // Típusfüggetlen keresés (szám vs string kezelése)
+      const courseToAdd = courses.find(
+        c => String(c.id) === String(courseId) || c.code === courseId
+      );
+
+      if (courseToAdd) {
+        setEnrolledCourses(prev => {
+          if (prev.some(c => String(c.id) === String(courseToAdd.id))) return prev;
+          return [...prev, courseToAdd];
+        });
+      }
+
+      await loadCourses();
+    } catch (err) {
+      alert(`Hiba a tárgy felvételekor: ${err.message}`);
+    }
+  };
+
+  // Kurzus leadása
+  const dropCourse = async (courseId) => {
+    try {
+      await dropCourseApi(currentUserId, courseId);
+      
+      setEnrolledCourses(prev => 
+        prev.filter(c => String(c.id) !== String(courseId) && c.code !== courseId)
+      );
+      
+      await loadCourses();
+    } catch (err) {
+      alert(`Hiba a tárgy leadásakor: ${err.message}`);
+    }
+  };
 
   return (
-    <EnrollmentContext.Provider value={value}>
+    <EnrollmentContext.Provider
+      value={{
+        courses,
+        enrolledCourses,
+        loading,
+        error,
+        enrollCourse,
+        dropCourse,
+        refreshCourses: loadCourses
+      }}
+    >
       {children}
     </EnrollmentContext.Provider>
-  )
-}
-
-EnrollmentProvider.propTypes = {
-  children: PropTypes.node.isRequired
-}
-
-export function useEnrollment() {
-  const ctx = useContext(EnrollmentContext)
-  if (!ctx) throw new Error('useEnrollment csak EnrollmentProvider-en belül használható')
-  return ctx
-}
+  );
+};
