@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import { X } from 'lucide-react'
 
 import './MobileMenu.css'
+import SidebarUser from './SidebarUser'
 
 
 function MobileMenu({ isOpen, onClose, children, className = '' }) {
@@ -28,6 +29,10 @@ function MobileMenu({ isOpen, onClose, children, className = '' }) {
             </button>
             <div className="mobile-menu-content">
                 {children}
+            </div>
+
+            <div className='admin-mobile-user'>
+                <SidebarUser />
             </div>
         </nav>
     )

@@ -1,0 +1,106 @@
+.sidebar-user {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    width: 100%;
+}
+
+.sidebar-user-card {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.5rem;
+    overflow: hidden;
+
+    border-radius: 1rem;
+    background: rgba(0, 0, 0, 0.04);
+}
+
+.sidebar-user-avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 2.4rem;
+    height: 2.4rem;
+
+    border-radius: 50%;
+    background: var(--secondary-color);
+    color: var(--text-color2);
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+.sidebar-user-text {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    max-width: 150px;
+    line-height: 1.25;
+    transition: all 0.3s ease;
+}
+
+.sidebar-user-text strong,
+.sidebar-user-text small {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.sidebar-user-text strong { font-size: 0.85rem; }
+.sidebar-user-text small { font-size: 0.72rem; opacity: 0.65; }
+
+.sidebar-user-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    width: 100%;
+    padding: 0.5rem;
+
+    border: 1.5px solid rgba(0, 0, 0, 0.12);
+    border-radius: 1rem;
+    background: transparent;
+    color: var(--text-color1);
+
+    font-family: var(--primary-font-family);
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.sidebar-user-btn svg {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+}
+
+.sidebar-user-btn:hover { border-color: var(--secondary-color); }
+
+.sidebar-user-btn--logout:hover {
+    border-color: #ef4444;
+    background: #fef2f2;
+    color: #dc2626;
+}
+
+.sidebar-user-label {
+    max-width: 150px;
+    overflow: hidden;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+}
+
+/* Összecsukott sidebar: csak a monogram és az ikon marad */
+.sidenav-collapsed .sidebar-user-card {
+    justify-content: center;
+    gap: 0;
+    padding: 0.4rem 0;
+}
+
+.sidenav-collapsed .sidebar-user-btn { gap: 0; }
+
+.sidenav-collapsed .sidebar-user-text,
+.sidenav-collapsed .sidebar-user-label {
+    max-width: 0;
+    opacity: 0;
+    overflow: hidden;
+}
