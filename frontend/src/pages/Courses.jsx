@@ -31,9 +31,6 @@ function Courses() {
         <span className="total-credits">
           <Award strokeWidth={3}/> Összes felvett kredit: {totalCredits}
         </span>
-        <button className="subject-sign-up-btn" type='button'>
-          <CircleCheckBig strokeWidth={3}/> Tárgyfelvétel Véglegesítése
-        </button>
       </TopBar>
 
       {error && <div className="error-banner">{error}</div>}
