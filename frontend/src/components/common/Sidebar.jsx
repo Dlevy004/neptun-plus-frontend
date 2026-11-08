@@ -6,6 +6,7 @@ import './Sidebar.css'
 import NavButton from './NavButton'
 import MobileMenu from './MobileMenu'
 import HideButton from './HideButton'
+import SidebarUser from './SidebarUser'
 
 
 function SideNavbar({ isMobileMenuOpen, closeMobileMenu, isCollapsed, setIsCollapsed }) {
@@ -33,6 +34,10 @@ function SideNavbar({ isMobileMenuOpen, closeMobileMenu, isCollapsed, setIsColla
                     </a>
 
                     {adminNavLinks}
+                </div>
+
+                <div className='sidenav-bottom'>
+                    <SidebarUser />
                 </div>
 
                 <HideButton isCollapsed={isCollapsed} setIsCollapsed={setIsCollapsed}/>

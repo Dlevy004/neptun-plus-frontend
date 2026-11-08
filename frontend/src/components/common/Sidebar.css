@@ -19,7 +19,7 @@
     background-color: #f8fafc;
 }
 
-.sidenav-container, .sidenav-top {
+.sidenav-container, .sidenav-collapsed, .sidenav-top {
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -32,6 +32,8 @@
     justify-content: start;
     overflow-y: auto;
     overflow-x: hidden;
+    flex: 1;
+    min-height: 0;
 }
 
 .sidenav-top::-webkit-scrollbar { display: none; }
@@ -136,4 +138,15 @@
     .admin-mobile-menu {
         width: min(75%, 250px);
     }
+}
+
+.sidenav-bottom {
+    width: 100%;
+    padding: 1rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.admin-mobile-user {
+    margin-top: auto;
+    padding: 0 clamp(25px, 3vw, 35px) 0 1rem;
 }
