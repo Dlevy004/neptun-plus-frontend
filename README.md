@@ -43,6 +43,32 @@ To run this project locally, you will need Node.js installed on your machine. Fo
 
 The terminal will output your local address (usually http://localhost:5173). Open this in your browser to see the app running.
 
+## 📡 API Endpoints
+The following endpoints are available:
+
+### Courses & Enrollment
+- Course management requests are sent directly to the base URL defined in `VITE_API_BASE_URL` (default: `http://localhost:8000`).
+
+- `GET /api/courses`: List available courses
+- `GET /api/users/{userId}/enrollments`: Fetch enrolled course IDs for a user
+- `POST /enroll`: Enroll in a course *(no `/api` prefix)*
+- `POST /drop`: Drop a course *(no `/api` prefix)*
+
+### Authentication
+- Authentication requests use a relative `/api/accounts` prefix, which the `vite.config.js` dev server proxy forwards to the login service (rewriting `/api/accounts` → `/api`, defaulting to `http://localhost:8002`).
+- **Token Handling:** The access token is sent via the `Authorization: Bearer <token>` header, while refresh tokens rely on `credentials: "include"` (HttpOnly cookie).
+
+- `POST /api/accounts/login/`: Authenticate a user and return a JWT token.
+- `POST /api/accounts/register/`: Register a new user account.
+- `POST /api/accounts/logout/`: Log out the current user and invalidate the JWT token.
+- `GET /api/accounts/me/`: Retrieve the profile information of the authenticated user.
+- `POST /api/accounts/token/refresh/`: Refresh the access token using the refresh token stored in an HttpOnly cookie.
+
+### Environment Variables
+```env
+VITE_API_BASE_URL=http://localhost:8000
+```
+
 ---
 
 <h3 align="center">👨‍💻 Developer</h3>
