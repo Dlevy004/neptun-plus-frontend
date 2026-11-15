@@ -10,9 +10,25 @@ export default defineConfig({
   server: {
     proxy: {
       '/api/accounts': {
-        target: process.env.VITE_ACCOUNT_API_BASE_URL || 'http://localhost:8002',
+        target: accountTarget,
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api\/accounts/, '/api'),
+      },
+      '/api/courses': {
+        target: enrollmentTarget,
+        changeOrigin: true,
+      },
+      '/api/users': {
+        target: enrollmentTarget,
+        changeOrigin: true,
+      },
+      '/enroll': {
+        target: enrollmentTarget,
+        changeOrigin: true,
+      },
+      '/drop': {
+        target: enrollmentTarget,
+        changeOrigin: true,
       },
     },
   },
