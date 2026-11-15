@@ -1,14 +1,12 @@
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? '';
-
 const toNumericId = (id) => {
   if (typeof id === 'number') return id;
-  const parsed = parseInt(String(id).replace(/\D/g, ''), 10);
-  return isNaN(parsed) ? id : parsed;
+  const parsed = Number.parseInt(String(id).replace(/\D/g, ''), 10);
+  return Number.isNaN(parsed) ? id : parsed;
 };
 
 export const fetchCourses = async () => {
   try {
-    const response = await fetch(`${API_BASE_URL}/api/courses`);
+    const response = await fetch('/api/courses');
     if (!response.ok) throw new Error('Nem sikerült a kurzusok betöltése.');
     const data = await response.json();
 
@@ -35,7 +33,7 @@ export const fetchCourses = async () => {
 
 export const fetchUserEnrollments = async (userId = 1) => {
   try {
-    const response = await fetch(`${API_BASE_URL}/api/users/${userId}/enrollments`);
+    const response = await fetch(`/api/users/${userId}/enrollments`);
     if (!response.ok) return [];
     const data = await response.json();
     return data.enrolled_course_ids || [];
@@ -47,7 +45,7 @@ export const fetchUserEnrollments = async (userId = 1) => {
 
 export const enrollCourseApi = async (userId, courseId) => {
   try {
-    const response = await fetch(`${API_BASE_URL}/enroll`, {
+    const response = await fetch('/enroll', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -73,7 +71,7 @@ export const enrollCourseApi = async (userId, courseId) => {
 
 export const dropCourseApi = async (userId, courseId) => {
   try {
-    const response = await fetch(`${API_BASE_URL}/drop`, {
+    const response = await fetch('/drop', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
